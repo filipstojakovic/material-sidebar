@@ -7,18 +7,18 @@ import MailIcon from "@mui/icons-material/Mail";
 import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {setHeaderText} from "../../redux/slices/headerSlice";
+import {useSelector} from "react-redux";
 import {HeaderText} from "./HeaderText";
+import {RootState, useAppDispatch} from "../../redux/store";
+import {onMenuItemClick} from "../../redux/slices/headerSlice";
 
 export function MenuItems() {
+    const selectedIndex: number = useSelector((state: RootState) => state.header.selectedIndex);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const dispatch = useAppDispatch();
 
-    function handleClick(path: string, headerText: string, index: number) {
-        setSelectedIndex(index);
-        dispatch(setHeaderText(headerText))
+    function handleClick(path: string, headerText: string, selectedIndex: number) {
+        dispatch(onMenuItemClick({headerText, selectedIndex}))
         navigate(path)
     }
 

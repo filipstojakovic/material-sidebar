@@ -3,20 +3,23 @@ import {HeaderText} from "../../menudrawer/menuitems/HeaderText";
 
 export type HeaderState = {
     headerText: string;
+    selectedIndex: number;
 }
 
 export const initialHeaderState = {
-    headerText: HeaderText.A_HEADER
+    headerText: HeaderText.A_HEADER,
+    selectedIndex: 0,
 } as HeaderState
 
 const headerSlice = createSlice({
     name: "header",
     initialState: initialHeaderState,
     reducers: {
-        setHeaderText: (state: HeaderState, action: PayloadAction<string>) => {
-            state.headerText = action.payload;
+        onMenuItemClick: (state: HeaderState, action: PayloadAction<HeaderState>) => {
+            state.headerText = action.payload.headerText;
+            state.selectedIndex = action.payload.selectedIndex;
         },
     }
 });
-export const {setHeaderText} = headerSlice.actions
+export const {onMenuItemClick} = headerSlice.actions
 export default headerSlice.reducer;
