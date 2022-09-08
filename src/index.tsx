@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {CssBaseline} from "@mui/material";
+import {store} from "./redux/store";
+import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-
 root.render(
     [
-        <App key="app"/>,
-        <CssBaseline key="css-baseline"/>
+        <Provider store={store} key="app-key">
+            <App/>
+        </Provider>
+        , <CssBaseline key="css-baseline"/>
     ]
 );

@@ -1,17 +1,19 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
-import {OpenDrawerProps} from "../menudrawer/MenuDrawer";
-import {DrawerContext} from "../App";
 import {AppBar} from "./style";
+import {useDispatch, useSelector} from "react-redux";
+import {handleOpenDrawer} from "../redux/slices/drawerSlice";
+import {RootState} from "../redux/store";
 
 export function TopAppBar() {
-    const {openDrawer, setOpenDrawer} = useContext<OpenDrawerProps>(DrawerContext);
+    const openDrawer: boolean = useSelector((state: RootState) => state.drawer.openDrawer);
+    const dispatch = useDispatch();
 
-    function handleOpenDrawer() {
-        setOpenDrawer(true);
+    function handleClick() {
+        dispatch(handleOpenDrawer());
     }
 
     return (
@@ -20,7 +22,7 @@ export function TopAppBar() {
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
-                    onClick={handleOpenDrawer}
+                    onClick={handleClick}
                     edge="start"
                     sx={{mr: 2, ...(openDrawer && {display: 'none'})}}
                 >

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Drawer from "@mui/material/Drawer";
 import {DrawerHeader} from "../styles";
 import IconButton from "@mui/material/IconButton";
@@ -6,21 +6,20 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Divider from "@mui/material/Divider";
 import {MenuItems} from "./menuitems/MenuItems";
-import {DrawerContext} from "../App";
 import {useTheme} from "@mui/material/styles";
 import {drawerStyle} from "./style";
+import {useDispatch, useSelector} from "react-redux";
+import {handleCloseDrawer} from "../redux/slices/drawerSlice";
+import {RootState} from "../redux/store";
 
-export type OpenDrawerProps = {
-    openDrawer: boolean;
-    setOpenDrawer: (arg: boolean) => void;
-};
 
 export function MenuDrawer() {
-    const {openDrawer, setOpenDrawer} = useContext<OpenDrawerProps>(DrawerContext);
     const theme = useTheme();
+    const openDrawer: boolean = useSelector((state: RootState) => state.drawer.openDrawer);
+    const dispatch = useDispatch();
 
     function handleDrawerClose() {
-        setOpenDrawer(false);
+        dispatch(handleCloseDrawer());
     }
 
     return (
