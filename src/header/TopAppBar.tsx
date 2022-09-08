@@ -10,6 +10,8 @@ import {RootState} from "../redux/store";
 
 export function TopAppBar() {
     const openDrawer: boolean = useSelector((state: RootState) => state.drawer.openDrawer);
+    const headerText: string = useSelector((state: RootState) => state.header.headerText);
+
     const dispatch = useDispatch();
 
     function handleClick() {
@@ -29,9 +31,10 @@ export function TopAppBar() {
                     <MenuIcon/>
                 </IconButton>
                 <Typography variant="h6" noWrap component="div">
-                    Persistent drawer header
+                    {headerText}
                 </Typography>
             </Toolbar>
         </AppBar>
     );
 }
+

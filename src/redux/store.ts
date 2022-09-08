@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import drawerSlice from "./slices/drawerSlice";
+import headerSlice from "./slices/headerSlice";
 
 export const store = configureStore({
     reducer: {
         drawer: drawerSlice,
+        header: headerSlice
     }
 });
 

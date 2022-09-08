@@ -7,21 +7,25 @@ import MailIcon from "@mui/icons-material/Mail";
 import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
 import {useNavigate} from "react-router-dom";
-
+import {useDispatch} from "react-redux";
+import {setHeaderText} from "../../redux/slices/headerSlice";
+import {HeaderText} from "./HeaderText";
 
 export function MenuItems() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-    function handleClick(path: string, index: number) {
+    function handleClick(path: string, headerText: string, index: number) {
         setSelectedIndex(index);
+        dispatch(setHeaderText(headerText))
         navigate(path)
     }
 
     return (
         <List>
             <ListItem disablePadding>
-                <ListItemButton onClick={(e) => handleClick("/a", 0)}
+                <ListItemButton onClick={(e) => handleClick("/a", HeaderText.A_HEADER, 0)}
                                 selected={selectedIndex === 0}>
                     <ListItemIcon>
                         <InboxIcon/>
@@ -31,7 +35,7 @@ export function MenuItems() {
             </ListItem>
 
             <ListItem disablePadding>
-                <ListItemButton onClick={(e) => handleClick("/b", 1)}
+                <ListItemButton onClick={(e) => handleClick("/b", HeaderText.B_HEADER, 1)}
                                 selected={selectedIndex === 1}>
                     <ListItemIcon>
                         <MailIcon/>
