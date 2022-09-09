@@ -4,11 +4,13 @@ export type DrawerState = {
     openDrawer: boolean;
 }
 
+const initialDrawerState = {
+    openDrawer: true
+} as DrawerState
+
 const drawerSlice = createSlice({
     name: "drawer",
-    initialState: {
-        openDrawer: true
-    } as DrawerState,
+    initialState: initialDrawerState,
     reducers: {
         handleOpenDrawer: (state: DrawerState) => {
             state.openDrawer = true;

@@ -5,21 +5,23 @@ import {DrawerHeader, Main} from "./styles";
 import {TopAppBar} from "./header/TopAppBar";
 import {AppRoutes} from "./routes/AppRoutes";
 import {MenuDrawer} from "./menudrawer/MenuDrawer";
-import {createTheme, ThemeProvider} from "@mui/material";
-import {green} from "@mui/material/colors";
+import {createTheme, PaletteMode, ThemeProvider} from "@mui/material";
+import {green, pink} from "@mui/material/colors";
 import {BrowserRouter} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootState} from "./redux/store";
 
-const theme = createTheme({
-    palette: {
-        mode: "light",
-        primary: green
-    }
-});
-
 export default function App() {
     const openDrawer: boolean = useSelector((state: RootState) => state.drawer.openDrawer);
+    const mode: PaletteMode = useSelector((state: RootState) => state.theme.mode);
+
+    const theme = createTheme({
+        palette: {
+            mode: mode,
+            primary: green,
+            secondary: pink
+        }
+    });
 
     return (
         <ThemeProvider theme={theme}>
