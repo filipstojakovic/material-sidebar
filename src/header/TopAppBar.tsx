@@ -7,6 +7,8 @@ import {AppBar} from "./style";
 import {useDispatch, useSelector} from "react-redux";
 import {handleOpenDrawer} from "../redux/slices/drawerSlice";
 import {RootState} from "../redux/store";
+import Tooltip from '@mui/material/Tooltip';
+import {AvatarButton} from "./avatarbutton/AvatarButton";
 
 export function TopAppBar() {
     const openDrawer: boolean = useSelector((state: RootState) => state.drawer.openDrawer);
@@ -21,18 +23,28 @@ export function TopAppBar() {
     return (
         <AppBar position="fixed" open={openDrawer}>
             <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleClick}
-                    edge="start"
-                    sx={{mr: 2, ...(openDrawer && {display: 'none'})}}
-                >
-                    <MenuIcon/>
-                </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    {headerText}
-                </Typography>
+                <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100%",
+                    flexDirection: "row",
+                }}>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleClick}
+                        edge="start"
+                        sx={{mr: 2, ...(openDrawer && {display: 'none'})}}
+                    >
+                        <Tooltip title="Open drawer">
+                            <MenuIcon/>
+                        </Tooltip>
+                    </IconButton>
+                    <Typography variant="h5" noWrap component="div" sx={{display: {xs: 'none', md: 'flex'}}}>
+                        {headerText}
+                    </Typography>
+                    <AvatarButton/>
+                </div>
             </Toolbar>
         </AppBar>
     );

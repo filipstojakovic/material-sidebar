@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {HeaderText} from "../../header/HeaderText";
+import {HeaderTextEnum} from "../../header/HeaderTextEnum";
 
 export type HeaderState = {
     headerText: string;
 }
 
 const initialHeaderState = {
-    headerText: HeaderText.A_HEADER,
+    headerText: HeaderTextEnum.A_HEADER,
 } as HeaderState
 
 const headerSlice = createSlice({

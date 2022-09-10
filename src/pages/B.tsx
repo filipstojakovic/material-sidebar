@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {HeaderText} from "../header/HeaderText";
+import {HeaderTextEnum} from "../header/HeaderTextEnum";
 import {updateHeaderText} from "../redux/slices/headerSlice";
 import {useAppDispatch} from "../redux/store";
 
@@ -7,7 +7,7 @@ export function B() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(updateHeaderText({headerText: HeaderText.B_HEADER}));
+        dispatch(updateHeaderText({headerText: HeaderTextEnum.B_HEADER}));
     })
 
     return (

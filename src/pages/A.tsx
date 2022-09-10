@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch} from "../redux/store";
 import {updateHeaderText} from "../redux/slices/headerSlice";
-import {HeaderText} from "../header/HeaderText";
+import {HeaderTextEnum} from "../header/HeaderTextEnum";
 
 
 export function A() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(updateHeaderText({headerText: HeaderText.A_HEADER}));
+        dispatch(updateHeaderText({headerText: HeaderTextEnum.A_HEADER}));
     })
 
     return (
