@@ -3,25 +3,24 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
-import {AppBar} from "./style";
 import {useDispatch, useSelector} from "react-redux";
-import {handleOpenDrawer} from "../redux/slices/drawerSlice";
+import {handleDrawerButton} from "../redux/slices/drawerSlice";
 import {RootState} from "../redux/store";
 import Tooltip from '@mui/material/Tooltip';
 import {AvatarButton} from "./avatarbutton/AvatarButton";
+import AppBar from '@mui/material/AppBar';
+
 
 export function TopAppBar() {
-    const openDrawer: boolean = useSelector((state: RootState) => state.drawer.openDrawer);
     const headerText: string = useSelector((state: RootState) => state.header.headerText);
-
     const dispatch = useDispatch();
 
     function handleClick() {
-        dispatch(handleOpenDrawer());
+        dispatch(handleDrawerButton());
     }
 
     return (
-        <AppBar position="fixed" open={openDrawer}>
+        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Toolbar>
                 <div style={{
                     display: "flex",
@@ -34,12 +33,13 @@ export function TopAppBar() {
                         aria-label="open drawer"
                         onClick={handleClick}
                         edge="start"
-                        sx={{mr: 2, ...(openDrawer && {display: 'none'})}}
+                        sx={{mr: 2}}
                     >
                         <Tooltip title="Open drawer">
                             <MenuIcon/>
                         </Tooltip>
                     </IconButton>
+
                     <Typography variant="h5" noWrap component="div" sx={{display: {xs: 'none', md: 'flex'}}}>
                         {headerText}
                     </Typography>

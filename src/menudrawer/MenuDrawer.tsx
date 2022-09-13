@@ -1,26 +1,13 @@
 import React from 'react';
 import Drawer from "@mui/material/Drawer";
-import {DrawerHeader} from "../styles";
-import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Divider from "@mui/material/Divider";
 import {MenuItems} from "./menuitems/MenuItems";
-import {useTheme} from "@mui/material/styles";
 import {drawerStyle} from "./style";
-import {useDispatch, useSelector} from "react-redux";
-import {handleCloseDrawer} from "../redux/slices/drawerSlice";
+import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
-
+import Toolbar from '@mui/material/Toolbar';
 
 export function MenuDrawer() {
-    const theme = useTheme();
     const openDrawer: boolean = useSelector((state: RootState) => state.drawer.openDrawer);
-    const dispatch = useDispatch();
-
-    function handleDrawerClose() {
-        dispatch(handleCloseDrawer());
-    }
 
     return (
         <Drawer
@@ -29,12 +16,7 @@ export function MenuDrawer() {
             anchor="left"
             open={openDrawer}
         >
-            <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
-                </IconButton>
-            </DrawerHeader>
-            <Divider/>
+            <Toolbar/>
             <MenuItems/>
         </Drawer>
     );
